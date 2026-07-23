@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="tank">
+    <static>true</static>
+
+    <!-- Hull + tracks + turret are all visuals/collisions on one link.
+         Approx dimensions of an M1-class MBT: ~7 m long incl. gun,
+         3.6 m wide, 2.4 m tall. Origin at ground level, gun points +X. -->
+    <link name="body">
+
+      <!-- ================= TRACKS ================= -->
+      <visual name="track_left_visual">
+        <pose>0 1.5 0.4 0 0 0</pose>
+        <geometry><box><size>7.0 0.7 0.8</size></box></geometry>
+        <material>
+          <ambient>0.06 0.06 0.06 1</ambient>
+          <diffuse>0.10 0.10 0.10 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <collision name="track_left_collision">
+        <pose>0 1.5 0.4 0 0 0</pose>
+        <geometry><box><size>7.0 0.7 0.8</size></box></geometry>
+      </collision>
+
+      <visual name="track_right_visual">
+        <pose>0 -1.5 0.4 0 0 0</pose>
+        <geometry><box><size>7.0 0.7 0.8</size></box></geometry>
+        <material>
+          <ambient>0.06 0.06 0.06 1</ambient>
+          <diffuse>0.10 0.10 0.10 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+      <collision name="track_right_collision">
+        <pose>0 -1.5 0.4 0 0 0</pose>
+        <geometry><box><size>7.0 0.7 0.8</size></box></geometry>
+      </collision>
+
+      <!-- ================= HULL ================= -->
+      <visual name="hull_visual">
+        <pose>0 0 1.1 0 0 0</pose>
+        <geometry><box><size>6.2 2.6 1.0</size></box></geometry>
+        <material>
+          <ambient>0.20 0.24 0.14 1</ambient>
+          <diffuse>0.26 0.30 0.18 1</diffuse>
+          <specular>0.10 0.10 0.08 1</specular>
+        </material>
+      </visual>
+      <collision name="hull_collision">
+        <pose>0 0 1.1 0 0 0</pose>
+        <geometry><box><size>6.2 2.6 1.0</size></box></geometry>
+      </collision>
+
+      <!-- sloped glacis plate at the front for silhouette -->
+      <visual name="glacis_visual">
+        <pose>3.4 0 1.0 0 0.6 0</pose>
+        <geometry><box><size>1.2 2.6 0.9</size></box></geometry>
+        <material>
+          <ambient>0.20 0.24 0.14 1</ambient>
+          <diffuse>0.26 0.30 0.18 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= TURRET ================= -->
+      <visual name="turret_visual">
+        <pose>-0.3 0 2.0 0 0 0</pose>
+        <geometry><box><size>3.2 2.4 0.7</size></box></geometry>
+        <material>
+          <ambient>0.20 0.24 0.14 1</ambient>
+          <diffuse>0.26 0.30 0.18 1</diffuse>
+          <specular>0.10 0.10 0.08 1</specular>
+        </material>
+      </visual>
+      <collision name="turret_collision">
+        <pose>-0.3 0 2.0 0 0 0</pose>
+        <geometry><box><size>3.2 2.4 0.7</size></box></geometry>
+      </collision>
+
+      <!-- commander's cupola -->
+      <visual name="cupola_visual">
+        <pose>-0.8 0.5 2.5 0 0 0</pose>
+        <geometry><cylinder><radius>0.35</radius><length>0.3</length></cylinder></geometry>
+        <material>
+          <ambient>0.18 0.21 0.12 1</ambient>
+          <diffuse>0.22 0.26 0.15 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= MAIN GUN ================= -->
+      <!-- cylinder's native axis is Z; pitch +90deg (0 1.5708 0) lays it along +X -->
+      <visual name="barrel_visual">
+        <pose>3.55 0 2.0 0 1.5708 0</pose>
+        <geometry><cylinder><radius>0.075</radius><length>4.6</length></cylinder></geometry>
+        <material>
+          <ambient>0.10 0.11 0.08 1</ambient>
+          <diffuse>0.14 0.16 0.10 1</diffuse>
+          <specular>0.20 0.20 0.20 1</specular>
+        </material>
+      </visual>
+      <collision name="barrel_collision">
+        <pose>3.55 0 2.0 0 1.5708 0</pose>
+        <geometry><cylinder><radius>0.075</radius><length>4.6</length></cylinder></geometry>
+      </collision>
+
+      <!-- fatter mantlet where the barrel meets the turret -->
+      <visual name="mantlet_visual">
+        <pose>1.4 0 2.0 0 1.5708 0</pose>
+        <geometry><cylinder><radius>0.2</radius><length>0.6</length></cylinder></geometry>
+        <material>
+          <ambient>0.16 0.19 0.11 1</ambient>
+          <diffuse>0.20 0.24 0.14 1</diffuse>
+        </material>
+      </visual>
+
+    </link>
+  </model>
+</sdf>

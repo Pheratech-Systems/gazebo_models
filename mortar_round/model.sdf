@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="mortar_round">
+    <!-- Dynamic rigid body. Add <static>true</static> if you just want
+         it as a prop. Round stands nose-up; long axis is Z. -->
+    <link name="link">
+
+      <!-- Inertia approximated as a solid cylinder:
+           m=13 kg, r=0.06 m, L~0.5 m.
+           Ixx=Iyy=(1/12)m(3r^2+L^2)~0.28 ; Izz=0.5 m r^2~0.023 -->
+      <inertial>
+        <pose>0 0 0.28 0 0 0</pose>
+        <mass>13.0</mass>
+        <inertia>
+          <ixx>0.28</ixx>
+          <iyy>0.28</iyy>
+          <izz>0.023</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- ================= BODY ================= -->
+      <visual name="body_visual">
+        <pose>0 0 0.30 0 0 0</pose>
+        <geometry><cylinder><radius>0.06</radius><length>0.30</length></cylinder></geometry>
+        <material>
+          <ambient>0.14 0.16 0.12 1</ambient>
+          <diffuse>0.22 0.26 0.18 1</diffuse>
+          <specular>0.10 0.10 0.10 1</specular>
+        </material>
+      </visual>
+
+      <!-- rounded ogive nose (sphere sitting on top of the body) -->
+      <visual name="nose_visual">
+        <pose>0 0 0.45 0 0 0</pose>
+        <geometry><sphere><radius>0.06</radius></sphere></geometry>
+        <material>
+          <ambient>0.14 0.16 0.12 1</ambient>
+          <diffuse>0.22 0.26 0.18 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= TAIL BOOM ================= -->
+      <visual name="boom_visual">
+        <pose>0 0 0.08 0 0 0</pose>
+        <geometry><cylinder><radius>0.028</radius><length>0.16</length></cylinder></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1</ambient>
+          <diffuse>0.12 0.12 0.12 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= CRUCIFORM FINS ================= -->
+      <!-- two crossed vanes give a 4-fin look -->
+      <visual name="fin_a_visual">
+        <pose>0 0 0.06 0 0 0</pose>
+        <geometry><box><size>0.16 0.006 0.14</size></box></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1</ambient>
+          <diffuse>0.12 0.12 0.12 1</diffuse>
+        </material>
+      </visual>
+      <visual name="fin_b_visual">
+        <pose>0 0 0.06 0 0 0</pose>
+        <geometry><box><size>0.006 0.16 0.14</size></box></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1</ambient>
+          <diffuse>0.12 0.12 0.12 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- ================= COLLISION ================= -->
+      <!-- one simple cylinder wrapping the whole round (cheap & stable) -->
+      <collision name="collision">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry><cylinder><radius>0.06</radius><length>0.5</length></cylinder></geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
